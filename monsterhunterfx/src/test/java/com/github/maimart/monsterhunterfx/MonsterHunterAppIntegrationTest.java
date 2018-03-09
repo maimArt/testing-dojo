@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.github.maimart.monsterhunterfx.monsters.Monster;
 import com.github.maimart.monsterhunterfx.monsters.RentAMonsterService;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -39,6 +40,17 @@ public class MonsterHunterAppIntegrationTest {
         Scene scene = new Scene(view.getRoot());
         stage.setScene(scene);
         stage.show();
+    }
+
+    @AfterEach
+    void tearDown(FxRobot robot) {
+        // just for presentation
+        robot.sleep(200);
+    }
+
+    @Test
+    void verifyInitialStateIdleIsShownOnStartup() {
+        assertThat(view.statusLabel, hasText(HuntingState.IDLING_AROUND.getMessage()));
     }
 
     @Test
